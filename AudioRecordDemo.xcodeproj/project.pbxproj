@@ -15,6 +15,7 @@
 		4AF9144321129930002F0D11 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9144221129930002F0D11 /* main.m */; };
 		4AF9144D21129930002F0D11 /* AudioRecordDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9144C21129930002F0D11 /* AudioRecordDemoTests.m */; };
 		4AF9145821129930002F0D11 /* AudioRecordDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9145721129930002F0D11 /* AudioRecordDemoUITests.m */; };
+		4AF9146721129F36002F0D11 /* AudioTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9146621129F36002F0D11 /* AudioTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		4AF9145321129930002F0D11 /* AudioRecordDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioRecordDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF9145721129930002F0D11 /* AudioRecordDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioRecordDemoUITests.m; sourceTree = "<group>"; };
 		4AF9145921129930002F0D11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AF9146521129F36002F0D11 /* AudioTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioTool.h; sourceTree = "<group>"; };
+		4AF9146621129F36002F0D11 /* AudioTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,8 @@
 				4AF914342112992E002F0D11 /* AppDelegate.m */,
 				4AF914362112992E002F0D11 /* ViewController.h */,
 				4AF914372112992E002F0D11 /* ViewController.m */,
+				4AF9146521129F36002F0D11 /* AudioTool.h */,
+				4AF9146621129F36002F0D11 /* AudioTool.m */,
 				4AF914392112992F002F0D11 /* Main.storyboard */,
 				4AF9143C21129930002F0D11 /* Assets.xcassets */,
 				4AF9143E21129930002F0D11 /* LaunchScreen.storyboard */,
@@ -210,7 +215,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4AF9142B2112992E002F0D11 /* Build configuration list for PBXProject "AudioRecordDemo" */;
+			buildConfigurationList = 4AF9142B2112992E002F0D11 /* Build configuration list for PBXProject "AudioRecordDemo01" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -264,6 +269,7 @@
 			files = (
 				4AF914382112992F002F0D11 /* ViewController.m in Sources */,
 				4AF9144321129930002F0D11 /* main.m in Sources */,
+				4AF9146721129F36002F0D11 /* AudioTool.m in Sources */,
 				4AF914352112992E002F0D11 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,7 +440,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BHN73T23TJ;
 				INFOPLIST_FILE = AudioRecordDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -450,7 +458,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BHN73T23TJ;
 				INFOPLIST_FILE = AudioRecordDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -534,7 +544,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4AF9142B2112992E002F0D11 /* Build configuration list for PBXProject "AudioRecordDemo" */ = {
+		4AF9142B2112992E002F0D11 /* Build configuration list for PBXProject "AudioRecordDemo01" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4AF9145A21129930002F0D11 /* Debug */,
