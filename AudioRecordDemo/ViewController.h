@@ -8,8 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum{
+    
+    WillSoundRecond = 0,
+    SoundReconding = 1,
+    DidSoundRecond = 2
+    
+} SoundRecondType;
+
 @interface ViewController : UIViewController
 
+@property (nonatomic,assign) SoundRecondType soundRecondType;
 
 @end
 

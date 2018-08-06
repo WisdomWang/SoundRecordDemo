@@ -7,7 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <AVFoundation/AVFoundation.h>
 @interface AudioTool : NSObject
+
+@property (nonatomic,strong) AVAudioRecorder *recorder;
+@property (nonatomic,strong) NSURL *url;
+@property (nonatomic,strong) AVAudioPlayer *player;
+
+- (void)beginSoundRecording;
+- (void)pauseSoundRecording;
+- (void)stopSoundRecording;
+- (void)beginPlay;
+- (void)pausePlay;
+- (void)resumePlay;
 
 @end
