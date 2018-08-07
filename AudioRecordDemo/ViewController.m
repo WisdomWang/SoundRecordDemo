@@ -188,7 +188,8 @@
     
     else if (self.soundRecondType == SoundReconding) {
         
-        self.soundButton.hidden = YES;
+        [_soundButton setImage:[UIImage imageNamed:@"dis_sound_next"] forState:UIControlStateNormal];
+        //self.soundButton.hidden = YES;
         repeatButton.hidden = NO;
         repeatPlayButton.hidden = NO;
         repeatRecondLabel.hidden = NO;
@@ -203,17 +204,29 @@
     }
     
     else {
+        
+        //此时调用[_audioTool mp3FilePath]即可获得录音的mp3格式，可进行上传录音操作
+        //上传代码省略
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"上传音频成功" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+            self->_timeLabel.text = @"00:00";
+            self->_titleLabel.text = @"准备录音";
+            [self->_soundButton setImage:[UIImage imageNamed:@"dis_sound_begin"] forState:UIControlStateNormal];
+            self->repeatButton.hidden = YES;
+            self->repeatPlayButton.hidden = YES;
+            self->repeatRecondLabel.hidden = YES;
+            self->repeatRecondPlayLabel.hidden = YES;
+             // self.soundButton.hidden = NO;
+             self.soundRecondType = WillSoundRecond;
+            [self->_audioTool beginSoundRecording];
+        }];
+        
+        [alert addAction:cancelAction];
+    
+        [self presentViewController:alert animated:YES completion:nil];
        
-        _timeLabel.text = @"00:00";
-        _titleLabel.text = @"准备录音";
-        [_soundButton setImage:[UIImage imageNamed:@"dis_sound_begin"] forState:UIControlStateNormal];
-        repeatButton.hidden = YES;
-        repeatPlayButton.hidden = YES;
-        repeatRecondLabel.hidden = YES;
-        repeatRecondPlayLabel.hidden = YES;
-        self.soundButton.hidden = NO;
-        self.soundRecondType = WillSoundRecond;
-        [_audioTool beginSoundRecording];
+   
     }
 }
 

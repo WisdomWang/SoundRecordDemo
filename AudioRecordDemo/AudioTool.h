@@ -20,5 +20,6 @@
 - (void)beginPlay;
 - (void)pausePlay;
 - (void)resumePlay;
+- (NSString *)mp3FilePath;
 
 @end
