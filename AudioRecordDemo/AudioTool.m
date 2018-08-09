@@ -72,7 +72,7 @@
         //音量，0-1之间
         //[_player setVolume:1];
         [_player prepareToPlay];
-        [_player play];
+        //[_player play];
     }
 }
 

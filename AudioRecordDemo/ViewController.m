@@ -16,11 +16,9 @@
 #define xStatusBarHeight    ([[UIApplication sharedApplication] statusBarFrame].size.height)
 #define xNavBarHeight       44.0f
 
-@interface ViewController () {
+@interface ViewController ()<AVAudioPlayerDelegate> {
     
     NSTimer *_timer;
-    NSTimer *_timer1;
-    
     UIButton *repeatButton;
     UIButton *repeatPlayButton;
     UILabel *repeatRecondLabel;
@@ -54,7 +52,6 @@
     [self createUI];
     
 }
-
 
 - (void)createUI {
     
@@ -165,11 +162,6 @@
     //先关闭定时器 用时再开启
     [_timer setFireDate:[NSDate distantFuture]];
     
-    _timer1 = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(isOrnotPlay) userInfo:nil repeats:YES];
-    //先关闭定时器 用时再开启
-    [_timer1 setFireDate:[NSDate distantFuture]];
-    
-    
 }
 
 - (void)beginSoundRecond {
@@ -189,7 +181,6 @@
     else if (self.soundRecondType == SoundReconding) {
         
         [_soundButton setImage:[UIImage imageNamed:@"dis_sound_next"] forState:UIControlStateNormal];
-        //self.soundButton.hidden = YES;
         repeatButton.hidden = NO;
         repeatPlayButton.hidden = NO;
         repeatRecondLabel.hidden = NO;
@@ -217,7 +208,6 @@
             self->repeatPlayButton.hidden = YES;
             self->repeatRecondLabel.hidden = YES;
             self->repeatRecondPlayLabel.hidden = YES;
-             // self.soundButton.hidden = NO;
              self.soundRecondType = WillSoundRecond;
             [self->_audioTool beginSoundRecording];
         }];
@@ -226,7 +216,6 @@
     
         [self presentViewController:alert animated:YES completion:nil];
        
-   
     }
 }
 
@@ -263,9 +252,9 @@
         [repeatPlayButton setImage:[UIImage imageNamed:@"dis_sound_playing"] forState:UIControlStateNormal];
         isPlay = YES;
         
-        //开启定时器
-        [_timer1 setFireDate:[NSDate distantPast]];
         [_audioTool beginPlay];
+        _audioTool.player.delegate =self;
+        [_audioTool resumePlay];
     }
     else {
         
@@ -275,17 +264,14 @@
     }
 }
 
--(void)isOrnotPlay {
-
-    if (self.audioTool.player.playing == NO) {
-        
-        [repeatPlayButton setImage:[UIImage imageNamed:@"dis_sound_repeatplay"] forState:UIControlStateNormal];
-        isPlay = NO;
-        //关闭定时器
-        [_timer1 setFireDate:[NSDate distantFuture]];
-        
-    }
-    
+// 音频播放完成时
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+    // 音频播放完成时，调用该方法。
+    // 参数flag：如果音频播放无法解码时，该参数为NO。
+    //当音频被终端时，该方法不被调用。而会调用audioPlayerBeginInterruption方法
+    // 和audioPlayerEndInterruption方法
+    [repeatPlayButton setImage:[UIImage imageNamed:@"dis_sound_repeatplay"] forState:UIControlStateNormal];
+    isPlay = NO;
 }
 
 -(void)changeTimeLabel{
