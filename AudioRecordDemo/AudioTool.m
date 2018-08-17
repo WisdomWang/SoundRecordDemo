@@ -31,9 +31,7 @@
         NSError *error;
         _recorder = [[AVAudioRecorder alloc]initWithURL:_url settings:recordSetting error:&error];
         NSLog(@"%@",error);
-        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-        [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-        [audioSession setActive:YES error:nil];
+        
         //_recorder.meteringEnabled = YES;
          //设置录音时长，超过这个时间后，会暂停单位是秒
         //[_recorder recordForDuration:30];
@@ -46,6 +44,9 @@
 
 - (void)beginSoundRecording {
     
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [audioSession setActive:YES error:nil];
     [_recorder record];
 }
 
@@ -56,6 +57,9 @@
 
 - (void)stopSoundRecording {
     
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [audioSession setActive:YES error:nil];
     [_recorder stop];
     [self audioCAFtoMP3];
 }
@@ -135,7 +139,7 @@
         lame_init_params(lame);
         
         do {
-            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
+            read = (int)fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
             if (read == 0)
                 write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
             else
