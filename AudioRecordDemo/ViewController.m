@@ -168,13 +168,31 @@
     
     if (self.soundRecondType == WillSoundRecond) {
         
-        [_soundButton setImage:[UIImage imageNamed:@"dis_sound_reconding"] forState:UIControlStateNormal];
-
-        //开启定时器
-        [_timer setFireDate:[NSDate distantPast]];
-        _titleLabel.text = @"正在录音";
-        self.soundRecondType = SoundReconding;
-        [_audioTool beginSoundRecording];
+        AVAuthorizationStatus videoAuthStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+        if (videoAuthStatus == AVAuthorizationStatusNotDetermined) {// 未询问用户是否授权
+            //第一次询问用户是否进行授权
+            [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+                // CALL YOUR METHOD HERE - as this assumes being called only once from user interacting with permission alert!
+                if (granted) {
+                    // Microphone enabled code
+                }
+                else {
+                    // Microphone disabled code
+                }
+            }];
+        }
+        else if(videoAuthStatus == AVAuthorizationStatusRestricted || videoAuthStatus == AVAuthorizationStatusDenied) {// 未授权
+            [self showSetAlertView];
+        }
+        else{// 已授权
+            
+            [_soundButton setImage:[UIImage imageNamed:@"dis_sound_reconding"] forState:UIControlStateNormal];
+            //开启定时器
+            [_timer setFireDate:[NSDate distantPast]];
+            _titleLabel.text = @"正在录音";
+            self.soundRecondType = SoundReconding;
+            [_audioTool beginSoundRecording];
+        }
         
     }
     
@@ -217,6 +235,22 @@
         [self presentViewController:alert animated:YES completion:nil];
        
     }
+}
+
+//提示用户进行麦克风使用授权
+- (void)showSetAlertView {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"麦克风权限未开启" message:@"麦克风权限未开启，请进入系统【设置】>【隐私】>【麦克风】中打开开关,开启麦克风功能" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *setAction = [UIAlertAction actionWithTitle:@"去设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //跳入当前App设置界面
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }];
+    [alertVC addAction:cancelAction];
+    [alertVC addAction:setAction];
+    
+    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 - (void)repeatSound {
